@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">מה הסיכוי?!</string>
+    <string name="activity_loading_LoadingQuestion">טוען שאלות...</string>
+    <string name="easy">קל</string>
+    <string name="medium">בינוני</string>
+    <string name="hard">קשה</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to Activity title -->
+    <string name="main_use_profile">הגדרות</string>
+
+    <!-- Strings related to Activity title -->
+    <string name="permission_read_denied">אנא התר הרשאות לקריאת נתונים על מנת לבחור תמונת פרופיל</string>
+
+    <!-- Strings related to login -->
+    <string name="enter">כניסה</string>
+    <string name="email">אימייל</string>
+    <string name="password">סיסמא</string>
+    <string name="sign_in">התחברות</string>
+    <string name="sign_up_now">משתמש חדש? הרשם עכשיו!</string>
+    <string name="sign_up_already_have_user">כבר יש לך משתמש? התחבר עכשיו!</string>
+    <string name="sign_up">הירשם</string>
+    <string name="sign_up_text">הרשמה</string>
+    <string name="title_activity_menu">MenuActivity</string>
+
+    <!-- Strings related to sign up -->
+    <string name="invalid_password">סיסמה לא תקינה, סיסמה חייבת להחיל לפחות 6 תווים, אותיות ומספרים בלבד</string>
+    <string name="invalid_email">אימייל שגוי, וודא שרשמת אימייל מלא</string>
+    <string name="empty_text">חייבים להזין אימייל וסיסמה</string>
+
+    <!-- Strings related to dialogs -->
+    <string name="progress_dialog_string">מה הסיכוי שאני אעלה?!</string>
+
+    <string name="question_manager">מאגר שאלות</string>
+    <string name="new_game">משחק חדש</string>
+    <string name="points">ניקוד</string>
+    <string name="settings">הגדרות</string>
+    <string name="share">שתף</string>
+    <string name="make_contact">צור קשר</string>
+    <string name="name">שם</string>
+    <string name="update">עדכן</string>
+    <string name="exit">יציאה</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="sign_out">התנתק</string>
+
+</resources>

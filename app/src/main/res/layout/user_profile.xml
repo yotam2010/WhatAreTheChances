@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_vertical_margin"
+        android:layout_gravity="center">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="150dp"
+            android:minWidth="150dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_person_black_24dp"
+            app:civ_border_color="@color/colorPrimaryDark"
+            app:civ_border_width="2dp"
+            android:layout_margin="@dimen/activity_vertical_margin"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/user_profile_image_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:src="@android:drawable/ic_menu_edit"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            />
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/user_profile_name"
+        style="@style/CustomEditView"
+        android:layout_width="wrap_content"
+        android:maxEms="20"
+        android:minWidth="@dimen/edit_text_min_width"
+        android:hint="@string/name"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:textColorHint="@color/editTextHintGray"
+       />
+    <Button
+        android:id="@+id/user_profile_save"
+        android:layout_marginTop="@dimen/twiceMargin"
+        style="@style/CustomButtonView"
+        android:text="@string/update"
+        android:layout_width="match_parent"
+        android:maxWidth="500dp"
+        android:layout_gravity="center_horizontal"/>
+</LinearLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true">
+        <shape>
+            <gradient android:endColor="@color/ButtonPressedSecondColor"
+                      android:gradientRadius="270dp"
+                      android:startColor="@color/ButtonPressedFirstColor"/>
+            <corners
+                android:radius="5dp"
+                />
+            <padding
+                android:bottom="8dp"
+                android:left="8dp"
+                android:right="8dp"
+                android:top="8dp"
+                />
+        </shape>
+    </item>
+    <item android:state_enabled="false">
+        <shape>
+            <gradient android:endColor="@color/ButtonDisable"
+                      android:gradientRadius="270dp"
+                      android:startColor="@color/ButtonDisable"/>
+            <corners
+                android:radius="5dp"
+                />
+            <padding
+                android:bottom="8dp"
+                android:left="8dp"
+                android:right="8dp"
+                android:top="8dp"
+                />
+        </shape>
+    </item>
+
+    <item>
+        <shape>
+            <gradient android:endColor="@color/ButtonFirstColor"
+                      android:gradientRadius="270dp"
+                      android:startColor="@color/ButtonSecondColor"/>
+            <corners
+                android:radius="5dp"
+                />
+            <padding
+                android:bottom="8dp"
+                android:left="8dp"
+                android:right="8dp"
+                android:top="8dp"
+                />
+        </shape>
+    </item>
+
+</selector>

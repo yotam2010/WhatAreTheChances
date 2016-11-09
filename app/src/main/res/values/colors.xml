@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4CAF50</color>
+    <color name="colorPrimaryDark">#2E7D32</color>
+    <color name="colorAccent">#69F0AE</color>
+    <color name="medalGold">#FFD700</color>
+    <color name="medalSilver">#C0C0C0</color>
+    <color name="medalBronze">#cd5632</color>
+    <color name="black">#000000</color>
+    <color name="blackTransperent">#98000000</color>
+    <color name="ButtonFirstColor">#FF9800</color>
+    <color name="ButtonSecondColor">#FFA726</color>
+    <color name="ButtonPressedFirstColor">#EF6C00</color>
+    <color name="ButtonPressedSecondColor">#E65100</color>
+    <color name="ButtonDisable">#d4d4d4</color>
+    <color name="editTextHint">#d6ffffff</color>
+    <color name="LoginActivityBackground">#96d1ff</color>
+    <color name="White">#FFFFFF</color>
+    <color name="editTextHintGray">#e3d9d9d9</color>
+</resources>
