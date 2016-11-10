@@ -13,6 +13,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 /**
  * Created by Yotam on 07/11/2016.
@@ -36,6 +38,20 @@ public class Utilities {
         return AppConstants.mFirebaseAuth;
     }
 
+    public static void setStorageReference() {
+        AppConstants.mFirebaseStorage = FirebaseStorage.getInstance();
+        AppConstants.mStorageReference = AppConstants.mFirebaseStorage.getReference();
+    }
+
+    public static FirebaseStorage getStorage() {
+        return AppConstants.mFirebaseStorage;
+    }
+
+
+    public static StorageReference getStorageReference() {
+        return AppConstants.mStorageReference;
+    }
+
     public static void setDatabaseReference() {
         AppConstants.mFirebaseDatabase = FirebaseDatabase.getInstance();
         AppConstants.mDatabaseReference = AppConstants.mFirebaseDatabase.getReference();
@@ -49,6 +65,7 @@ public class Utilities {
     public static DatabaseReference getReference() {
         return AppConstants.mDatabaseReference;
     }
+
 
     public static boolean stringCheck(String s){
         return s.matches("[-\\p{Alnum}]+");

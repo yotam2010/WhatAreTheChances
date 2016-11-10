@@ -23,6 +23,13 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //SET Firebase componets
+        Utilities.setDatabaseReference();
+        Utilities.setUserAuth();
+        Utilities.setStorageReference();
+        AppConstants.MY_UID = AppConstants.mFirebaseUser.getUid();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

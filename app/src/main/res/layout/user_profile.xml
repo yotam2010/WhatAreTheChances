@@ -8,7 +8,6 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/activity_vertical_margin"
         android:layout_gravity="center">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -46,10 +45,24 @@
        />
     <Button
         android:id="@+id/user_profile_save"
-        android:layout_marginTop="@dimen/twiceMargin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         style="@style/CustomButtonView"
         android:text="@string/update"
         android:layout_width="match_parent"
         android:maxWidth="500dp"
         android:layout_gravity="center_horizontal"/>
+    <TextView
+        style="@style/CustomTextView"
+        android:text="@string/add_first_friend"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textColor="@color/black"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:visibility="gone"
+        android:id="@+id/user_profile_contacts_recycler"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

@@ -4,6 +4,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 /**
  * Created by Yotam on 07/11/2016.
@@ -16,6 +18,8 @@ public class AppConstants {
     public static FirebaseUser mFirebaseUser=null;
     public static FirebaseDatabase mFirebaseDatabase=null;
     public static DatabaseReference mDatabaseReference=null;
+    public static FirebaseStorage mFirebaseStorage=null;
+    public static StorageReference mStorageReference = null;
 
     public static final String QUESTIONS="QUESTIONS";
     public static final String QUESTION="QUESTION ";

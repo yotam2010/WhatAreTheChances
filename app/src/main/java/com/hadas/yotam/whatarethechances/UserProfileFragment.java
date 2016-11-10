@@ -14,6 +14,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,11 @@ import android.widget.EditText;
 import com.google.android.gms.common.images.ImageManager;
 import com.google.android.gms.games.internal.GamesContract;
 import com.google.android.gms.plus.model.people.Person;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -39,6 +46,8 @@ public class UserProfileFragment extends Fragment {
     private FloatingActionButton mImagePicker;
     private static final int REQUEST_READ_PERMISSIONS = 1;
     private static final int ACTIVITY_IMAGE_RESULT = 2;
+    private MainActivity mActivity;
+    private String IMAGE_UPLOAD_FAILURE;
 
     @Nullable
     @Override
@@ -51,14 +60,26 @@ public class UserProfileFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mImageLocation=null;
+        //get activity
+        mActivity = (MainActivity)getActivity();
+        //get activity strings
+        IMAGE_UPLOAD_FAILURE = mActivity.getResources().getString(R.string.image_upload_failure);
         //set activity title
         FRAGMENT_NAME = getActivity().getResources().getString(R.string.main_use_profile);
-        getActivity().setTitle(FRAGMENT_NAME);
+        mActivity.setTitle(FRAGMENT_NAME);
         //get fragment view
-        mProfileView = (CircleImageView) getActivity().findViewById(R.id.user_profile_image);
-        mImagePicker = (FloatingActionButton) getActivity().findViewById(R.id.user_profile_image_picker);
-        mNameView = (EditText) getActivity().findViewById(R.id.user_profile_name);
-        mSaveButton = (Button) getActivity().findViewById(R.id.user_profile_save);
+        mProfileView = (CircleImageView) mActivity.findViewById(R.id.user_profile_image);
+        mImagePicker = (FloatingActionButton) mActivity.findViewById(R.id.user_profile_image_picker);
+        mNameView = (EditText) mActivity.findViewById(R.id.user_profile_name);
+        mSaveButton = (Button) mActivity.findViewById(R.id.user_profile_save);
+
+        mSaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         mImagePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +96,43 @@ public class UserProfileFragment extends Fragment {
             }
         });
 
+    }
+
+
+    private void saveImageToStorage() {
+        final String name = mNameView.getText().toString().trim();
+        //check if name field is null or empty, if it is dont save
+        if(name==null|| TextUtils.isEmpty(name))
+            return;
+
+        String imagePath = mImageLocation;
+        //get database reference to the user data
+        final DatabaseReference mUserData = AppConstants.mDatabaseReference.child(AppConstants.USERS)
+                .child(AppConstants.MY_UID);
+        //if user picked image
+        if (imagePath != null) {
+            //get profile file location
+            StorageReference mImageUploadReference = AppConstants.mStorageReference.child(AppConstants.PROFILE_PIC)
+                    .child(AppConstants.mFirebaseUser.getUid());
+            //upload file
+            mImageUploadReference.putFile(Uri.parse(imagePath)).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    if (!task.isSuccessful()) {
+                        //faield to upload, document
+                        Utilities.fragmentToast(mActivity, IMAGE_UPLOAD_FAILURE);
+                        Log.d("tag", task.getException().getMessage());
+                    }else{
+                        //upload successful
+                        mUserData.child(AppConstants.PROFILE_PIC).setValue(task.getResult().getDownloadUrl());
+                        mUserData.child(AppConstants.NAME).setValue(name);
+                    }
+                }
+            });
+        }else{
+            mUserData.child(AppConstants.PROFILE_PIC).setValue("");
+            mUserData.child(AppConstants.NAME).setValue(name);
+        }
     }
 
     @Override
@@ -101,6 +159,7 @@ public class UserProfileFragment extends Fragment {
             }
         }
     }
+
 
     private String getImageLocation(Uri uri) {
         String projection[]= {MediaStore.Images.ImageColumns.DATA};
