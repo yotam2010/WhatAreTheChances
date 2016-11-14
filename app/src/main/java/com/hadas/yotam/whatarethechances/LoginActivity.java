@@ -22,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     GoogleApiClient mGoogleApiClient;
     Boolean googleSignIn;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +61,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser()!=null)
                 {
+                    //SET Firebase componets
+                    Utilities.setDatabaseReference();
+                    Utilities.setUserAuth();
+                    Utilities.setStorageReference();
+                    AppConstants.MY_UID = AppConstants.mFirebaseUser.getUid();
+                    Utilities.setFirebaseProfileConstants();
                     Log.d("tag",firebaseAuth.getCurrentUser().getUid()+" "+firebaseAuth.getCurrentUser().getProviders());
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

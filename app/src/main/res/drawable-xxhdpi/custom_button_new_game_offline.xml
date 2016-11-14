@@ -3,9 +3,11 @@
 
     <item android:state_pressed="true">
         <shape>
-            <gradient android:endColor="@color/ButtonPressedSecondColor"
+            <gradient
                       android:gradientRadius="270dp"
-                      android:startColor="@color/ButtonPressedFirstColor"/>
+                      android:endColor="@color/OfflineButtonPressedFirstColor"
+                      android:startColor="@color/OfflineButtonPressedSecondColor"
+/>
 
             <padding
                 android:bottom="8dp"
@@ -32,9 +34,12 @@
 
     <item>
         <shape>
-            <gradient android:endColor="@color/ButtonFirstColor"
+            <gradient
                       android:gradientRadius="270dp"
-                      android:startColor="@color/ButtonSecondColor"/>
+                      android:endColor="@color/OfflineButtonFirstColor"
+                      android:startColor="@color/OfflineButtonSecondColor"
+/>
+
             <padding
                 android:bottom="8dp"
                 android:left="8dp"

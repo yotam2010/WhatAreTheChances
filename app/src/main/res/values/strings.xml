@@ -14,6 +14,8 @@
 
     <!-- Strings related to ERRORS -->
     <string name="image_upload_failure">נכשל לעלות את התמונה</string>
+    <string name="no_network_connection">אין גישה לרשת</string>
+    <string name="name_require">חובה להזין שם</string>
 
     <!-- Strings related to login -->
     <string name="enter">כניסה</string>
@@ -24,7 +26,6 @@
     <string name="sign_up_already_have_user">כבר יש לך משתמש? התחבר עכשיו!</string>
     <string name="sign_up">הירשם</string>
     <string name="sign_up_text">הרשמה</string>
-    <string name="title_activity_menu">MenuActivity</string>
 
     <!-- Strings related to sign up -->
     <string name="invalid_password">סיסמה לא תקינה, סיסמה חייבת להחיל לפחות 6 תווים, אותיות ומספרים בלבד</string>
@@ -34,6 +35,7 @@
     <!-- Strings related to dialogs -->
     <string name="progress_dialog_string">מה הסיכוי שאני אעלה?!</string>
 
+    <!-- Strings related to drawer -->
     <string name="question_manager">מאגר שאלות</string>
     <string name="new_game">משחק חדש</string>
     <string name="points">ניקוד</string>
@@ -52,5 +54,7 @@
     <string name="sign_out">התנתק</string>
     <!-- No users in the friends database-->
     <string name="add_first_friend">לא הוספת משתמשים, הוסף את הראשון עוד היום!</string>
+    <string name="offline_game">משחק עצמאי</string>
+    <string name="online_game">משחק ברשת</string>
 
 </resources>

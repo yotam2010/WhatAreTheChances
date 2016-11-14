@@ -101,7 +101,7 @@ public class SignInFragment extends Fragment {
                 //check strings
                 if(!checkStrings(email,password))
                     return;
-                Utilities.showProgressDialog(getActivity());
+                Utilities.showProgressDialog(getActivity(),false);
                 mSignInButton.setEnabled(false);
                 //attempt to sign up
                 signInAttempt(email,password);
@@ -138,7 +138,7 @@ public class SignInFragment extends Fragment {
     }
 
     private void googleSignInFirebase(GoogleSignInAccount mAccount){
-        Utilities.showProgressDialog(getActivity());
+        Utilities.showProgressDialog(getActivity(),false);
         AuthCredential mAuthCredential = GoogleAuthProvider.getCredential(mAccount.getIdToken(),null);
         mLoginActivity.mAuth.signInWithCredential(mAuthCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

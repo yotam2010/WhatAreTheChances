@@ -15,20 +15,27 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     FragmentManager mFragmentManager;
+    int drawerSelected;
+    NavigationView navigationView;
+    DatabaseReference mUsersStatus;
+    NewGameActivity.PlayerStatus playerStatus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        drawerSelected=-1;
 
-        //SET Firebase componets
-        Utilities.setDatabaseReference();
-        Utilities.setUserAuth();
-        Utilities.setStorageReference();
-        AppConstants.MY_UID = AppConstants.mFirebaseUser.getUid();
+        mUsersStatus= AppConstants.mDatabaseReference.child(AppConstants.USERS_STATUS_LIST);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -41,11 +48,16 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
         if(!AppSharedPreference.isUserSet(this)){
             navigationView.setEnabled(false);
-            mFragmentManager.beginTransaction().replace(R.id.main_activity_fragment,new UserProfileFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_user_profile);
+            mFragmentManager.beginTransaction().replace(R.id.main_activity_fragment, new UserProfileFragment()).commit();
+        }else{
+            navigationView.setCheckedItem(R.id.nav_new_game);
+            mFragmentManager.beginTransaction().replace(R.id.main_activity_fragment, new NewGameActivity()).commit();
         }
     }
 
@@ -76,11 +88,13 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         switch (id){
             case R.id.menu_sign_out:
-            Utilities.getAuth().signOut();
+                playerStatus = new NewGameActivity.PlayerStatus(AppConstants.MY_NAME, AppConstants.MY_UID, AppConstants.MY_PROFILE, AppConstants.USER_BUSY);
+                mUsersStatus.child(AppConstants.MY_UID).setValue(playerStatus);
+                Utilities.getAuth().signOut();
                 Intent intent = new Intent(this,LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
                 this.finish();
+                startActivity(intent);
             break;
         }
 
@@ -92,23 +106,66 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        if(id!=drawerSelected) {
+            if (id == R.id.nav_new_game) {
+                mFragmentManager.beginTransaction().replace(R.id.main_activity_fragment, new NewGameActivity()).commit();
+            } else if (id == R.id.nav_points) {
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+            } else if (id == R.id.nav_questions) {
 
-        } else if (id == R.id.nav_slideshow) {
+            } else if (id == R.id.nav_user_profile) {
+                mFragmentManager.beginTransaction().replace(R.id.main_activity_fragment, new UserProfileFragment()).commit();
+            } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_manage) {
+            } else if (id == R.id.nav_send) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            }
         }
-
+        drawerSelected=id;
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+        if(AppConstants.MY_PROFILE==null || AppConstants.MY_NAME ==null) {
+            DatabaseReference mRef = AppConstants.mDatabaseReference.child(AppConstants.USERS).child(AppConstants.MY_UID);
+            mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot ds : dataSnapshot.getChildren()){
+                        if(ds.getKey().equals(AppConstants.NAME))
+                            AppConstants.MY_NAME=ds.getValue(String.class);
+                        else {
+                            AppConstants.MY_PROFILE=ds.getValue(String.class);
+                        }
+                    }
+                    playerStatus = new NewGameActivity.PlayerStatus(AppConstants.MY_NAME, AppConstants.MY_UID, AppConstants.MY_PROFILE, AppConstants.USER_ONLINE);
+                    mUsersStatus.child(AppConstants.MY_UID).setValue(playerStatus);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+            else{
+            playerStatus = new NewGameActivity.PlayerStatus(AppConstants.MY_NAME, AppConstants.MY_UID, AppConstants.MY_PROFILE, AppConstants.USER_ONLINE);
+            mUsersStatus.child(AppConstants.MY_UID).setValue(playerStatus);
+        }
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        NewGameActivity.PlayerStatus playerStatus = new NewGameActivity.PlayerStatus(AppConstants.MY_NAME,AppConstants.MY_UID,AppConstants.MY_PROFILE,AppConstants.USER_BUSY);
+        mUsersStatus.child(AppConstants.MY_UID).setValue(playerStatus);
+    }
+
 }

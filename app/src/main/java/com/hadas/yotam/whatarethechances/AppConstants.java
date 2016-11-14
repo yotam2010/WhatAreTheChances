@@ -22,9 +22,12 @@ public class AppConstants {
     public static StorageReference mStorageReference = null;
 
     public static final String QUESTIONS="QUESTIONS";
+    public static final String DEFAULT_PROFILE="https://firebasestorage.googleapis.com/v0/b/what-are-the-chances.appspot.com/o/ic_person_black_24dp.png?alt=media&token=269bc869-ec30-4cf1-8a41-b290afb2f937";
     public static final String QUESTION="QUESTION ";
     public static final String CATEGORY="CATEGORY";
     public static final String DIFFICULTY="DIFFICULTY";
+    public static final String USERS_STATUS_LIST="USERS_STATUS_LIST";
+    public static final String USER_STATUS="USER_STATUS";
     public static final String TEXT="TEX ";
     public static final String USERS="USERS";
     public static final String UID="UID";
@@ -53,6 +56,8 @@ public class AppConstants {
     public static final String RESPOND_RAND="RESPOND_RAND";
     public static final String ANSWER_ACCEPT="ANSWER_ACCEPT";
     public static final String QUESTION_ACCEPT="QUESTION_ACCEPT";
+    public static final String USER_ONLINE="Online";
+    public static final String USER_BUSY="Busy";
 
     //App Constants
     public static String MY_UID=null;

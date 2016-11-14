@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="1dp">
+
+            <Button
+                style="@style/CustomButtonView"
+                android:layout_width="match_parent"
+                android:minHeight="75dp"
+                android:text="@string/offline_game"
+                android:background="@drawable/custom_button_new_game_offline"/>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_marginRight="1dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <Button
+                style="@style/CustomButtonView"
+                android:layout_width="match_parent"
+                android:text="@string/online_game"
+                android:minHeight="75dp"
+                android:background="@drawable/custom_button_new_game_online"/>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:iconifiedByDefault="false"
+            android:maxWidth="500dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/new_game_users_status"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+
+    </LinearLayout>
+
+</LinearLayout>

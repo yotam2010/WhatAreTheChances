@@ -3,16 +3,16 @@
 
     <item android:state_pressed="true">
         <shape>
-            <gradient android:endColor="@color/ButtonPressedSecondColor"
+            <gradient android:endColor="@color/OnlineButtonPressedFirstColor"
                       android:gradientRadius="270dp"
-                      android:startColor="@color/ButtonPressedFirstColor"/>
-
+                      android:startColor="@color/OnlineButtonPressedSecondColor"/>
             <padding
                 android:bottom="8dp"
                 android:left="8dp"
                 android:right="8dp"
                 android:top="8dp"
                 />
+
         </shape>
     </item>
     <item android:state_enabled="false">
@@ -32,9 +32,10 @@
 
     <item>
         <shape>
-            <gradient android:endColor="@color/ButtonFirstColor"
+            <gradient android:endColor="@color/OnlineButtonFirstColor"
                       android:gradientRadius="270dp"
-                      android:startColor="@color/ButtonSecondColor"/>
+                      android:startColor="@color/OnlineButtonSecondColor"/>
+
             <padding
                 android:bottom="8dp"
                 android:left="8dp"

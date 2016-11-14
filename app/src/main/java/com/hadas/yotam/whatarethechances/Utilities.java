@@ -9,10 +9,14 @@ import android.support.v4.net.ConnectivityManagerCompat;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -54,6 +58,8 @@ public class Utilities {
 
     public static void setDatabaseReference() {
         AppConstants.mFirebaseDatabase = FirebaseDatabase.getInstance();
+        if(AppConstants.mDatabaseReference==null)
+             AppConstants.mFirebaseDatabase.setPersistenceEnabled(true);
         AppConstants.mDatabaseReference = AppConstants.mFirebaseDatabase.getReference();
     }
 
@@ -77,16 +83,22 @@ public class Utilities {
         Toast.makeText(context,s,Toast.LENGTH_SHORT).show();
     }
 
-    public static void showProgressDialog(Context context){
+    public static void showProgressDialog(Context context,boolean progressFlag){
         final String progressDialogString = context.getResources().getString(R.string.progress_dialog_string);
         mProgressDialog = new ProgressDialog(context);
         mProgressDialog.setCancelable(false);
         mProgressDialog.setMessage(progressDialogString);
+        if(progressFlag)
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.show();
     }
     public static void dismissProgressDialog(){
         if(mProgressDialog!=null)
             mProgressDialog.cancel();
+    }
+    public static void dialogProgress(int progress){
+        if(mProgressDialog!=null && mProgressDialog.isShowing())
+            mProgressDialog.setProgress(progress);
     }
     public static boolean checkInternetConnection(Context context){
         ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -95,6 +107,27 @@ public class Utilities {
             return true;
         }
         return false;
+    }
+
+    public static void setFirebaseProfileConstants(){
+        DatabaseReference mRef = AppConstants.mDatabaseReference.child(AppConstants.USERS).child(AppConstants.MY_UID);
+        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    if(ds.getKey().equals(AppConstants.NAME))
+                        AppConstants.MY_NAME=ds.getValue(String.class);
+                    else {
+                        AppConstants.MY_PROFILE=ds.getValue(String.class);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
 

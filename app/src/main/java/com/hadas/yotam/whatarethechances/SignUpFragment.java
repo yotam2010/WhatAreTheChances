@@ -87,7 +87,7 @@ public class SignUpFragment extends Fragment {
                if(!checkStrings(email,password))
                    return;
 
-                Utilities.showProgressDialog(getActivity());
+                Utilities.showProgressDialog(getActivity(),false);
                 mSignUpButton.setEnabled(false);
                 //attempt to sign up
                 signUpAttempt(email,password);
