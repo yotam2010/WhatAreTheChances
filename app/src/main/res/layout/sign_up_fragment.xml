@@ -33,7 +33,8 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:inputType="textPassword"
         android:maxLength="20"
-        android:hint="@string/password"/>
+        android:hint="@string/password"
+        android:imeOptions="actionDone"/>
 
     <Button
         android:id="@+id/sign_up_button"
@@ -41,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:maxWidth="400dp"
-        android:text="@string/sign_up_now"/>
+        android:text="@string/sign_up"/>
 
 
     <TextView

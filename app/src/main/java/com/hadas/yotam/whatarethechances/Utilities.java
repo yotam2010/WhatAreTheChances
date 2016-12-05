@@ -1,5 +1,6 @@
 package com.hadas.yotam.whatarethechances;
 
+import android.animation.Animator;
 import android.app.ProgressDialog;
 import android.app.usage.NetworkStatsManager;
 import android.content.Context;
@@ -7,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.net.ConnectivityManagerCompat;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -58,8 +60,8 @@ public class Utilities {
 
     public static void setDatabaseReference() {
         AppConstants.mFirebaseDatabase = FirebaseDatabase.getInstance();
-        if(AppConstants.mDatabaseReference==null)
-             AppConstants.mFirebaseDatabase.setPersistenceEnabled(true);
+//        if(AppConstants.mDatabaseReference==null)
+//             AppConstants.mFirebaseDatabase.setPersistenceEnabled(true);
         AppConstants.mDatabaseReference = AppConstants.mFirebaseDatabase.getReference();
     }
 
@@ -117,7 +119,7 @@ public class Utilities {
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
                     if(ds.getKey().equals(AppConstants.NAME))
                         AppConstants.MY_NAME=ds.getValue(String.class);
-                    else {
+                    else if(ds.getKey().equals(AppConstants.PROFILE_PIC)) {
                         AppConstants.MY_PROFILE=ds.getValue(String.class);
                     }
                 }
@@ -128,6 +130,34 @@ public class Utilities {
 
             }
         });
+    }
+
+
+    public static void endLoaderAnimation(final View animateView){
+        animateView.animate().alpha(0).setDuration(1000).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                animateView.setVisibility(View.GONE);
+                animateView.clearAnimation();
+                animateView.setAlpha(1f);
+                animateView.setEnabled(true);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        }).start();
     }
 
 

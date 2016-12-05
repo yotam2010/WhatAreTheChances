@@ -9,14 +9,19 @@ import android.support.v4.content.ContextCompat;
  */
 
 public class AppSharedPreference {
-    public static boolean isUserSet(Context context){
-        SharedPreferences mSharedPreference = context.getSharedPreferences(AppConstants.SHARED_PREFERENCE_GLOBAL, Context.MODE_PRIVATE);
-        return mSharedPreference.getBoolean(AppConstants.SHARED_PREFERENCE_USER_SET,false);
+
+    //Shared Preference
+    public static final String SHARED_PREFERENCE_GLOBAL="SHARED_PREFERENCE_GLOBAL";
+    public static final String STARTED_GAME_PREFERENCE="STARTED_GAME";
+
+
+    public static void setGameStarted(Context context,boolean flag){
+    SharedPreferences mSharedPreference = context.getSharedPreferences(SHARED_PREFERENCE_GLOBAL,Context.MODE_PRIVATE);
+        mSharedPreference.edit().putBoolean(STARTED_GAME_PREFERENCE,flag).commit();
+        }
+    public static Boolean getGameStarted(Context context){
+        SharedPreferences mSharedPreference = context.getSharedPreferences(SHARED_PREFERENCE_GLOBAL,Context.MODE_PRIVATE);
+        return mSharedPreference.getBoolean(STARTED_GAME_PREFERENCE,false);
     }
-    public static void userSet(Context context){
-        SharedPreferences mSharedPreference = context.getSharedPreferences(AppConstants.SHARED_PREFERENCE_GLOBAL, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = mSharedPreference.edit();
-        editor.putBoolean(AppConstants.SHARED_PREFERENCE_USER_SET,true);
-        editor.commit();
-    }
+
 }

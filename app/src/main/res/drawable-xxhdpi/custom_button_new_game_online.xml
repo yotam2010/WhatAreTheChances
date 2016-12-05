@@ -5,7 +5,7 @@
         <shape>
             <gradient android:endColor="@color/OnlineButtonPressedFirstColor"
                       android:gradientRadius="270dp"
-                      android:startColor="@color/OnlineButtonPressedSecondColor"/>
+                      android:startColor="@color/OnlineButtonPressedFirstColor"/>
             <padding
                 android:bottom="8dp"
                 android:left="8dp"
@@ -34,7 +34,7 @@
         <shape>
             <gradient android:endColor="@color/OnlineButtonFirstColor"
                       android:gradientRadius="270dp"
-                      android:startColor="@color/OnlineButtonSecondColor"/>
+                      android:startColor="@color/OnlineButtonFirstColor"/>
 
             <padding
                 android:bottom="8dp"

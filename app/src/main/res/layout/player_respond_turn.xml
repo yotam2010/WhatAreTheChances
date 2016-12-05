@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical">
+
+    <TextView
+        style="@style/CustomTextView"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:text="@string/waiting_for_opponet_string"
+        android:id="@+id/waiting_for_opponet"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/opponet_question_text"
+        style="@style/CustomTextView"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+
+
+    <TextView
+        android:id="@+id/opponet_question_difficulty"
+        style="@style/CustomTextView"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:visibility="gone"
+        android:id="@+id/player_respond_buttons_layout"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/player_respond_accept_question"
+            style="@style/CustomButtonView"
+            android:layout_width="0dp"
+            android:layout_margin="@dimen/short_padding"
+            android:layout_weight="1"
+            android:text="@string/accept_string"
+            />
+
+        <Button
+            android:id="@+id/player_respond_decline_question"
+            style="@style/CustomButtonView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/short_padding"
+            android:layout_weight="1"
+            android:text="@string/denay_string"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/player_respond_media_layout"
+        android:orientation="horizontal">
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        <ImageButton
+            android:id="@+id/respond_video_button"
+            android:layout_gravity="center"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/videocamera"/>
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        <ImageButton
+            android:layout_gravity="center"
+            android:id="@+id/respond_picture_button"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/camera"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        <ImageButton
+            android:id="@+id/respond_audio_button"
+            android:layout_gravity="center"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/mic"/>
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/eight_dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/player_respond_audio_layout"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/player_respond_audio_recorder"
+        app:srcCompat="@drawable/mic_no_background"/>
+        <SeekBar
+            android:layout_marginTop="@dimen/eight_dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/player_respond_audio_seek"
+            />
+    <Button
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/player_respond_send_audio"
+        style="@style/CustomButtonView"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/eight_dp"
+        android:text="@string/send_audio_file_string"
+        />
+    </LinearLayout>
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

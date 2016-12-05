@@ -6,8 +6,7 @@
               android:orientation="vertical"
               android:paddingLeft="@dimen/activity_horizontal_margin"
               android:paddingRight="@dimen/activity_horizontal_margin"
-              android:paddingTop="@dimen/activity_vertical_margin"
->
+              android:paddingTop="@dimen/activity_vertical_margin">
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,22 +26,51 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|left"
-            android:layout_margin="@dimen/activity_vertical_margin"
-            android:src="@android:drawable/ic_menu_edit"
+            android:layout_margin="@dimen/eight_dp"
+            android:src="@drawable/ic_insert_photo_black_24dp"
             />
     </FrameLayout>
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="שם"
+        android:textStyle="bold"
+        android:textSize="@dimen/bodyTextView"
+        android:textColor="@color/White"
+        android:layout_marginLeft="@dimen/eight_dp"
+        android:id="@+id/user_profile_name_textView"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_edit"
+            android:id="@+id/user_profile_name_edit_button"/>
+    </LinearLayout>
+
     <EditText
+        android:visibility="gone"
+        android:layout_margin="@dimen/activity_vertical_margin"
         android:id="@+id/user_profile_name"
         style="@style/CustomEditView"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
+        android:inputType="textPersonName"
+        android:textStyle="bold"
+        android:textSize="@dimen/bodyTextView"
         android:hint="@string/name"
         android:maxLength="20"
         android:minWidth="@dimen/edit_text_min_width"
-        android:textColor="@color/black"
+        android:textColor="@color/White"
         android:textColorHint="@color/editTextHintGray"
        />
     <Button
+        android:visibility="gone"
         android:id="@+id/user_profile_save"
         style="@style/CustomButtonView"
         android:layout_width="match_parent"

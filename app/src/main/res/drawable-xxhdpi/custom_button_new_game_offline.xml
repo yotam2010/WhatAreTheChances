@@ -6,7 +6,7 @@
             <gradient
                       android:gradientRadius="270dp"
                       android:endColor="@color/OfflineButtonPressedFirstColor"
-                      android:startColor="@color/OfflineButtonPressedSecondColor"
+                      android:startColor="@color/OfflineButtonPressedFirstColor"
 />
 
             <padding
@@ -37,7 +37,7 @@
             <gradient
                       android:gradientRadius="270dp"
                       android:endColor="@color/OfflineButtonFirstColor"
-                      android:startColor="@color/OfflineButtonSecondColor"
+                      android:startColor="@color/OfflineButtonFirstColor"
 />
 
             <padding

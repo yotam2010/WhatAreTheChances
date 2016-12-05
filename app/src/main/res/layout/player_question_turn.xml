@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/question_layout"
+              android:gravity="center_horizontal">
+
+    <EditText
+        style="@style/CustomEditView"
+        android:hint="@string/question_string"
+        android:maxLength="60"
+        android:layout_width="wrap_content"
+        android:minWidth="@dimen/edit_text_min_width"
+        android:maxLines="3"
+        android:textColor="@color/black"
+        android:textColorHint="@color/editTextHintGray"
+        android:id="@+id/player_question_editText"/>
+
+    <Spinner
+        android:layout_marginTop="@dimen/eight_dp"
+        android:layout_width="match_parent"
+        android:entries="@array/difficulty_array"
+        android:layout_height="wrap_content"
+        android:id="@+id/player_question_difficulty_spinner"/>
+
+    <Button
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        style="@style/CustomButtonView"
+        android:text="@string/send_question_string"
+        android:id="@+id/player_question_send_button"/>
+    <TextView
+        android:layout_marginTop="@dimen/eight_dp"
+        android:visibility="gone"
+        style="@style/CustomTextView"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:text="@string/waiting_for_opponet_respond_text"
+        android:id="@+id/waiting_for_respond"
+        android:textStyle="bold"/>
+    <VideoView
+        android:visibility="gone"
+      android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/player_respond_videoView"/>
+    <ImageView
+        android:visibility="gone"
+         android:layout_weight="1"
+        android:scaleType="centerCrop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/player_respond_imageView"/>
+    <SeekBar
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/eight_dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/player_question_audio_seek"
+        />
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/question_respond_buttons"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:gravity="center"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_clear_black_24dp"
+            android:layout_margin="@dimen/eight_dp"
+
+            android:id="@+id/question_respond_media_decline"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_done_black_24dp"
+            android:layout_margin="@dimen/eight_dp"
+            android:id="@+id/question_respond_media_accept"
+            />
+
+        <!--<android.support.design.widget.FloatingActionButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:srcCompat="@drawable/ic_clear_black_24dp"-->
+            <!--android:layout_margin="@dimen/eight_dp"-->
+            <!--android:id="@+id/question_respond_media_decline"/>-->
+        <!--<android.support.design.widget.FloatingActionButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:srcCompat="@drawable/ic_done_black_24dp"-->
+            <!--android:layout_margin="@dimen/eight_dp"-->
+            <!--android:id="@+id/question_respond_media_accept"/>-->
+
+    </LinearLayout>
+
+
+</LinearLayout>

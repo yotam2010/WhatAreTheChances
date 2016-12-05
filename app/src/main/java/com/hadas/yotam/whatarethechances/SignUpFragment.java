@@ -128,6 +128,7 @@ public class SignUpFragment extends Fragment {
             public void onFailure(@NonNull Exception e) {
                 e.printStackTrace();
                 Log.d("tag","Message:      "+e.getMessage());
+                Utilities.dismissProgressDialog();
                 Utilities.fragmentToast(getContext().getApplicationContext(),e.getMessage());
             }
         });

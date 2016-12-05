@@ -26,6 +26,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -59,12 +61,15 @@ public class UserProfileFragment extends Fragment {
     private Uri mImageLocationUri;
     private CircleImageView mProfileView;
     private EditText mNameView;
+    private TextView mNameText;
+    private ImageView mEditButton;
     private Button mSaveButton;
     private FloatingActionButton mImagePicker;
     private MainActivity mActivity;
     private String IMAGE_UPLOAD_FAILURE;
     private String NO_NETWORK_CONNECTION;
     private String NAME_REQUIRE;
+    public static String UPLOAD_SUCESS;
 
 
     @Nullable
@@ -83,6 +88,7 @@ public class UserProfileFragment extends Fragment {
         mActivity = (MainActivity)getActivity();
         //get activity strings
         IMAGE_UPLOAD_FAILURE = mActivity.getResources().getString(R.string.image_upload_failure);
+        UPLOAD_SUCESS = getString(R.string.upload_sucess);
         NO_NETWORK_CONNECTION=mActivity.getString(R.string.no_network_connection);
         NAME_REQUIRE=mActivity.getString(R.string.name_require);
         //set activity title
@@ -92,9 +98,18 @@ public class UserProfileFragment extends Fragment {
         mProfileView = (CircleImageView) mActivity.findViewById(R.id.user_profile_image);
         mImagePicker = (FloatingActionButton) mActivity.findViewById(R.id.user_profile_image_picker);
         mNameView = (EditText) mActivity.findViewById(R.id.user_profile_name);
+        mNameText = (TextView) mActivity.findViewById(R.id.user_profile_name_textView);
+        mEditButton = (ImageView) mActivity.findViewById(R.id.user_profile_name_edit_button);
+        mEditButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            showSave();
+            }
+        });
+
         mSaveButton = (Button) mActivity.findViewById(R.id.user_profile_save);
 
-        if(AppSharedPreference.isUserSet(mActivity)){
+        if(mActivity.userSet){
             setUserData();
         }
         mSaveButton.setOnClickListener(new View.OnClickListener() {
@@ -122,15 +137,26 @@ public class UserProfileFragment extends Fragment {
 
     }
 
+    private void showSave(){
+        String name = TextUtils.isEmpty(mNameText.getText().toString()) ? null : mNameText.getText().toString();
+        mEditButton.setVisibility(View.GONE);
+        mNameText.setVisibility(View.GONE);
+        mNameView.setVisibility(View.VISIBLE);
+        mSaveButton.setVisibility(View.VISIBLE);
+        if(name!=null)
+            mNameView.setText(name);
+    }
     private void setUserData(){
         DatabaseReference mUserDataRead = AppConstants.mDatabaseReference.child(AppConstants.USERS).child(AppConstants.MY_UID);
         mUserDataRead.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                if(getActivity()==null)
+                    return;
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
                     if(ds.getKey().equals(AppConstants.NAME))
-                        mNameView.setText(ds.getValue(String.class));
-                    else {
+                        mNameText.setText(ds.getValue(String.class));
+                    else if(ds.getKey().equals(AppConstants.PROFILE_PIC)){
                         if(Utilities.checkInternetConnection(getActivity())) {
                             Glide.with(mActivity).load(ds.getValue()).placeholder(R.drawable.ic_person_black_24dp).dontAnimate().centerCrop().into(mProfileView);
                             mImageLocation = ds.getValue(String.class);
@@ -178,8 +204,10 @@ public class UserProfileFragment extends Fragment {
                     //upload successful
                     mUserData.child(AppConstants.PROFILE_PIC).setValue(taskSnapshot.getDownloadUrl().toString());
                     mUserData.child(AppConstants.NAME).setValue(name);
-                    AppSharedPreference.userSet(getContext());
+                    mUserData.child(AppConstants.USER_SET).setValue(true);
+                    saveUserFinal(name,taskSnapshot.getDownloadUrl().toString());
                     mActivity.navigationView.setEnabled(true);
+                    Utilities.fragmentToast(getActivity(),UPLOAD_SUCESS);
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -191,8 +219,12 @@ public class UserProfileFragment extends Fragment {
             }).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    mEditButton.setVisibility(View.VISIBLE);
+                    mNameText.setVisibility(View.VISIBLE);
+                    mSaveButton.setVisibility(View.VISIBLE);
+                    mNameView.setVisibility(View.GONE);
+                    mNameView.setText(name);
                     //when uplaod complete, eitehr fail or success, dismiss dialog
-                    Utilities.setFirebaseProfileConstants();
                     Utilities.dismissProgressDialog();
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -208,15 +240,27 @@ public class UserProfileFragment extends Fragment {
 
         }else{
             //if user didnt pick image, save the user data with the default image
-                if(mImageLocation==null)
-                        mUserData.child(AppConstants.PROFILE_PIC).setValue(AppConstants.DEFAULT_PROFILE);
+                if(mImageLocation==null) {
+                    mImageLocation=AppConstants.DEFAULT_PROFILE;
+                    mUserData.child(AppConstants.PROFILE_PIC).setValue(mImageLocation);
+                }
                 else
                         mUserData.child(AppConstants.PROFILE_PIC).setValue(mImageLocation);
+
             mUserData.child(AppConstants.NAME).setValue(name);
-            AppSharedPreference.userSet(getContext());
+            mUserData.child(AppConstants.USER_SET).setValue(true);
+            saveUserFinal(name,mImageLocation);
             mActivity.navigationView.setEnabled(true);
-            Utilities.setFirebaseProfileConstants();
+            Utilities.fragmentToast(getActivity(),UPLOAD_SUCESS);
+
             }
+    }
+
+    public void saveUserFinal(String name, String profile){
+        mActivity.userSet=true;
+        Utilities.setFirebaseProfileConstants();
+        NewGameActivity.PlayerStatus playerStatus = new NewGameActivity.PlayerStatus(name, AppConstants.MY_UID, profile, AppConstants.USER_ONLINE);
+        mActivity.mUsersStatus.child(AppConstants.MY_UID).setValue(playerStatus);
     }
 
     @Override
@@ -246,6 +290,8 @@ public class UserProfileFragment extends Fragment {
             mImage = imageExifInterface(mImageLocation,mImage);
             if(mImage!=null){
                 mProfileView.setImageBitmap(mImage);
+                if(mNameView.getVisibility()==View.GONE)
+                    showSave();
             }
         }
     }
@@ -254,8 +300,11 @@ public class UserProfileFragment extends Fragment {
         String projection[]= {MediaStore.Images.ImageColumns.DATA};
         Cursor c = getActivity().getContentResolver().query(uri,projection,null,null,null);
         if(c.moveToFirst()){
-            return c.getString(c.getColumnIndex(MediaStore.Images.ImageColumns.DATA));
+            String myPic=c.getString(c.getColumnIndex(MediaStore.Images.ImageColumns.DATA));
+            c.close();
+            return myPic;
         }
+        c.close();
         return null;
     }
 

@@ -14,8 +14,12 @@
 
     <!-- Strings related to ERRORS -->
     <string name="image_upload_failure">נכשל לעלות את התמונה</string>
+    <string name="video_upload_failure">נכשל לעלות את הסרטון</string>
+    <string name="audio_upload_failure">נכשל לעלות את הקובץ קול</string>
     <string name="no_network_connection">אין גישה לרשת</string>
     <string name="name_require">חובה להזין שם</string>
+    <string name="string_too_short">השאלה קצרה מדי.</string>
+    <string name="error_no_audio">לא נמצא קובץ שמע</string>
 
     <!-- Strings related to login -->
     <string name="enter">כניסה</string>
@@ -34,17 +38,29 @@
 
     <!-- Strings related to dialogs -->
     <string name="progress_dialog_string">מה הסיכוי שאני אעלה?!</string>
+    <string name="alert_dialog_signOut">האם ברצונך להתנתק?</string>
+    <string name="toast_loading_data">אנא המתן לסיום הטעינה...</string>
+
+    <!-- Strings related to respond -->
+    <string name="respond_yes">כן</string>
+    <string name="respond_no">לא</string>
+    <string name="accept_string">קבל</string>
+    <string name="denay_string">דחה</string>
 
     <!-- Strings related to drawer -->
     <string name="question_manager">מאגר שאלות</string>
     <string name="new_game">משחק חדש</string>
-    <string name="points">ניקוד</string>
+    <string name="friends_string">חברים</string>
+    <string name="match_history">היסטוריית משחקים</string>
     <string name="settings">הגדרות</string>
     <string name="share">שתף</string>
     <string name="make_contact">צור קשר</string>
     <string name="name">שם</string>
     <string name="update">עדכן</string>
     <string name="exit">יציאה</string>
+    <string name="set_account_error">קודם שמור את הפרופיל</string>
+    <string name="set_account_complete">הפרופיל נשמר בהצלחה!</string>
+    <string name="upload_complete">הקובץ הועלה בהצלחה!</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -52,9 +68,34 @@
 
     <string name="action_settings">Settings</string>
     <string name="sign_out">התנתק</string>
+
     <!-- No users in the friends database-->
     <string name="add_first_friend">לא הוספת משתמשים, הוסף את הראשון עוד היום!</string>
+
     <string name="offline_game">משחק עצמאי</string>
     <string name="online_game">משחק ברשת</string>
+    <string name="title_activity_online_game">OnlineGame</string>
+    <string name="upload_sucess">הפרופיל עודכן בהצלחה</string>
+    <string name="against_string">נגד</string>
+    <string name="question_string">שאלה</string>
+    <string name="send_question_string">שלח שאלה</string>
+    <string name="waiting_for_opponet_string">מחכה לשאלה מהיריב...</string>
+    <string name="waiting_for_opponet_acceptDecline">מחכה שהיריב יאשר או ידחה את ההוכחה...</string>
+    <string name="opponet_accepted">היריב אישר!</string>
+    <string name="opponet_declined">היריב דחה :(</string>
+    <string name="opponet_left_match">היריב עזב את המשחק</string>
+
+    <!-- AD string -->
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="waiting_for_opponet_respond_text">ממתין לקבלת תגובה מהיריב</string>
+    <string name="send_audio_file_string">שלח קובץ שמע</string>
+    <string name="leave_game_string">עזוב משחק</string>
+
+
+    <string-array name="difficulty_array">
+        <item>קל</item>
+        <item>בינוני</item>
+        <item>קשה</item>
+    </string-array>
 
 </resources>
