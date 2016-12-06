@@ -13,7 +13,7 @@
         android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/White"
         android:text="לא שמורה לך היסטוריית משחקים, התחל משחק חדש!"
         android:textSize="@dimen/titleTextView"
         android:id="@+id/matches_no_items_text"/>

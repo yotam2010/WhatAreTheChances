@@ -219,11 +219,8 @@ public class UserProfileFragment extends Fragment {
             }).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                    mEditButton.setVisibility(View.VISIBLE);
-                    mNameText.setVisibility(View.VISIBLE);
-                    mSaveButton.setVisibility(View.VISIBLE);
-                    mNameView.setVisibility(View.GONE);
-                    mNameView.setText(name);
+                    hideSave(name);
+
                     //when uplaod complete, eitehr fail or success, dismiss dialog
                     Utilities.dismissProgressDialog();
                 }
@@ -247,15 +244,20 @@ public class UserProfileFragment extends Fragment {
                 else
                         mUserData.child(AppConstants.PROFILE_PIC).setValue(mImageLocation);
 
-            mUserData.child(AppConstants.NAME).setValue(name);
-            mUserData.child(AppConstants.USER_SET).setValue(true);
-            saveUserFinal(name,mImageLocation);
+            hideSave(name);
             mActivity.navigationView.setEnabled(true);
             Utilities.fragmentToast(getActivity(),UPLOAD_SUCESS);
 
             }
     }
 
+    public void hideSave(String name){
+        mEditButton.setVisibility(View.VISIBLE);
+        mNameText.setVisibility(View.VISIBLE);
+        mSaveButton.setVisibility(View.GONE);
+        mNameView.setVisibility(View.GONE);
+        mNameView.setText(name);
+    }
     public void saveUserFinal(String name, String profile){
         mActivity.userSet=true;
         Utilities.setFirebaseProfileConstants();
